@@ -1,4 +1,5 @@
 import "./css/MovieCard.css";
+import axios from "axios";
 
 interface Movie {
   url: string;
