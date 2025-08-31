@@ -1,10 +1,11 @@
 import "./css/MovieCard.css";
-import axios from "axios";
 
 interface Movie {
-  url: string;
+  Images: string;
   title: string;
   releaseDate: string;
+  Title: string;
+  releasedDate: string;
 }
 
 export default function MovieCard({ movie }: { movie: Movie }) {
@@ -14,7 +15,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
   return (
     <div className="movie-card">
       <div className="movie-poster">
-        <img src={movie.url} alt={movie.title} />
+        <img src={movie.Images} alt={movie.title} />
         <div className="movie-overlay">
           <button className="favourite-btn" onClick={handleClick}>
             ♥
@@ -22,8 +23,8 @@ export default function MovieCard({ movie }: { movie: Movie }) {
         </div>
       </div>
       <div className="movie-info">
-        <h3>{movie.title}</h3>
-        <p>{movie.releaseDate}</p>
+        <h3 style={{ color: "white" }}>{movie.Title}</h3>
+        <p>{movie.releasedDate}</p>
       </div>
     </div>
   );

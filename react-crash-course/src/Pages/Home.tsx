@@ -1,19 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MovieCard from "../MovieCard";
 import "../css/Home.css";
+import axios from "axios";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const movies = [
-    { id: 1, title: "ABC", releaseDate: "2000", url: "" },
-    { id: 2, title: "xyz", releaseDate: "2001", url: "" },
-    { id: 3, title: "def", releaseDate: "1111", url: "" },
-  ];
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/src/assets/Mock-data/movies.json");
+        setMovies(response.data.movies);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array means this runs once after the initial render
+  console.log("test", movies);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(searchQuery, "padam");
     setSearchQuery("");
   };
   return (
@@ -31,8 +48,8 @@ function Home() {
         </button>
       </form>
       <div className="movies-grid">
-        {movies.map((movie) => (
-          <MovieCard movie={movie} key={movie.id} />
+        {movies.map((movie, idx) => (
+          <MovieCard movie={movie} key={idx} />
         ))}
       </div>
     </div>
