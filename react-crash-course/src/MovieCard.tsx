@@ -9,9 +9,7 @@ interface Movie {
 }
 
 export default function MovieCard({ movie }: { movie: Movie }) {
-  function handleClick() {
-    console.log("I m clicked");
-  }
+  function handleClick() {}
   return (
     <div className="movie-card">
       <div className="movie-poster">

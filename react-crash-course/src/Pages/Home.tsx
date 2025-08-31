@@ -3,10 +3,19 @@ import MovieCard from "../MovieCard";
 import "../css/Home.css";
 import axios from "axios";
 
+interface Movie {
+  Images: string;
+  title: string;
+  releaseDate: string;
+  Title: string;
+  releasedDate: string;
+  imdbID: string;
+  [key: string]: any;
+}
+
 function Home() {
   const [searchQuery, setSearchQuery] = useState<string>("");
-
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -23,8 +32,7 @@ function Home() {
     };
 
     fetchData();
-  }, []); // Empty dependency array means this runs once after the initial render
-  console.log("test", movies);
+  }, []);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -48,9 +56,12 @@ function Home() {
         </button>
       </form>
       <div className="movies-grid">
-        {movies.map((movie, idx) => (
-          <MovieCard movie={movie} key={idx} />
-        ))}
+        {movies.map(
+          (movie, idx) =>
+            movie.Title.toLowerCase().includes(searchQuery) && (
+              <MovieCard movie={movie} key={idx} />
+            )
+        )}
       </div>
     </div>
   );
