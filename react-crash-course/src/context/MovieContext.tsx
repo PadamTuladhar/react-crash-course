@@ -1,6 +1,10 @@
 import { createContext, useEffect, useState, useContext } from "react";
 
 interface Movie {
+  Images: string;
+  title: string;
+  Title: string;
+  releasedDate: string;
   imdbID: string;
   [key: string]: any;
 }
@@ -17,7 +21,7 @@ const MovieContext = createContext<MovieContextType | undefined>(undefined);
 export const useMovieContext = () => {
   const context = useContext(MovieContext);
   if (!context) {
-    throw new Error('useMovieContext must be used within a MovieProvider');
+    throw new Error("useMovieContext must be used within a MovieProvider");
   }
   return context;
 };

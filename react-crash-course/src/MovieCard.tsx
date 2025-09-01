@@ -4,15 +4,13 @@ import { useMovieContext } from "./context/MovieContext";
 interface Movie {
   Images: string;
   title: string;
-  releaseDate: string;
   Title: string;
   releasedDate: string;
   imdbID: string;
 }
 
 export default function MovieCard({ movie }: { movie: Movie }) {
-  const { isFavorite, removeFromFavorites, addToFavorites } =
-    useMovieContext();
+  const { isFavorite, removeFromFavorites, addToFavorites } = useMovieContext();
 
   const favorite = isFavorite(movie.imdbID);
 

@@ -6,7 +6,6 @@ import axios from "axios";
 interface Movie {
   Images: string;
   title: string;
-  releaseDate: string;
   Title: string;
   releasedDate: string;
   imdbID: string;
