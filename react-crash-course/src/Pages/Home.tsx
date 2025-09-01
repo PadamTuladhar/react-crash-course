@@ -39,6 +39,12 @@ function Home() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    if (searchQuery !== "") {
+      const filteredMovies = movies.filter((movie) =>
+        movie.Title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setMovies(filteredMovies);
+    }
     setSearchQuery("");
   };
   return (
@@ -57,10 +63,11 @@ function Home() {
       </form>
       <div className="movies-grid">
         {movies.map(
-          (movie, idx) =>
-            movie.Title.toLowerCase().includes(searchQuery) && (
-              <MovieCard movie={movie} key={idx} />
-            )
+          (movie, idx) => (
+            <MovieCard movie={movie} key={idx} />
+          )
+          // movie.Title.toLowerCase().includes(searchQuery) && (
+          // )
         )}
       </div>
     </div>
