@@ -39,13 +39,12 @@ function Home() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (searchQuery !== "") {
-      const filteredMovies = movies.filter((movie) =>
-        movie.Title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setMovies(filteredMovies);
-    }
-    setSearchQuery("");
+    if (!searchQuery.trim()) return;
+
+    const filteredMovies = movies.filter((movie) =>
+      movie.Title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setMovies(filteredMovies);
   };
   return (
     <div className="home">
