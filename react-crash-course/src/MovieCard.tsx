@@ -1,4 +1,5 @@
 import "./css/MovieCard.css";
+import { useMovieContext } from "./context/MovieContext";
 
 interface Movie {
   Images: string;
@@ -6,16 +7,33 @@ interface Movie {
   releaseDate: string;
   Title: string;
   releasedDate: string;
+  imdbID: string;
 }
 
 export default function MovieCard({ movie }: { movie: Movie }) {
-  function handleClick() {}
+  const { isFavorite, removeFromFavorites, addToFavorites } =
+    useMovieContext();
+
+  const favorite = isFavorite(movie.imdbID);
+
+  function handleClick(e: any) {
+    e.preventDefault();
+    if (favorite) {
+      removeFromFavorites(movie.imdbID);
+      return;
+    }
+    addToFavorites(movie);
+  }
+
   return (
     <div className="movie-card">
       <div className="movie-poster">
         <img src={movie.Images} alt={movie.title} />
         <div className="movie-overlay">
-          <button className="favourite-btn" onClick={handleClick}>
+          <button
+            className={`favorite-btn ${favorite ? "active" : ""}`}
+            onClick={handleClick}
+          >
             ♥
           </button>
         </div>
