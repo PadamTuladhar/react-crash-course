@@ -1,5 +1,4 @@
 import "./App.css";
-import Home from "./Pages/Home";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import { MovieProvider } from "./context/MovieContext";
